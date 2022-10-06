@@ -1,54 +1,15 @@
 import React from 'react';
-import { alpha, InputBase, styled, Tooltip } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useIntl } from 'react-intl';
+import { Search } from './StyledSearch';
+import { SearchIconWrapper } from './StyledSearchIconWrapper';
+import { StyledInputBase } from './StyledInputBase';
 
 type SearchInputs = {
     query: string;
 };
-
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    width: '100%',
-    margin: '0 auto',
-    [theme.breakpoints.up('sm')]: {
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    paddingLeft: theme.spacing(1),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: theme.spacing(5),
-        transition: theme.transitions.create('width'),
-        backgroundColor: alpha(theme.palette.text.primary, 0.15),
-        '&:hover': {
-            backgroundColor: alpha(theme.palette.text.primary, 0.25),
-        },
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: `120px`,
-            '&:focus': {
-                width: '150px',
-            },
-        },
-        borderRadius: theme.shape.borderRadius,
-    },
-    '&.Mui-error .MuiInputBase-input': {
-        outline: `1px solid ${theme.palette.error.main}`,
-    },
-}));
 
 const SearchBar = () => {
     const {
@@ -56,6 +17,7 @@ const SearchBar = () => {
         handleSubmit,
         formState: { errors },
     } = useForm<SearchInputs>();
+    const intl = useIntl();
 
     const handleFormSubmit: SubmitHandler<SearchInputs> = (data) => {
         alert(JSON.stringify(data));
@@ -72,10 +34,10 @@ const SearchBar = () => {
                         {...register('query', {
                             required: {
                                 value: true,
-                                message: 'This is field is required',
+                                message: intl.formatMessage({ id: 'app.navigation.search.errorMessage' }),
                             },
                         })}
-                        placeholder="Search..."
+                        placeholder={intl.formatMessage({ id: 'app.navigation.search.placeholder' })}
                         error={!!errors.query}
                     />
                 </Search>

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getLocale, getTheme } from '../utils/settingsStorage';
 import { AppTheme } from '../utils/appTheme';
-import { AppLocale } from '../localization/localization';
+import { AppLocale } from '../constants/locales';
 import { LocaleAction, MobileOpenAction, ThemeAction } from './actions';
 import { RootState } from './store';
 

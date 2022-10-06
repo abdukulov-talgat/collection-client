@@ -1,0 +1,8 @@
+{
+    "app.navigation.signIn": "Вход",
+    "app.navigation.signUp": "Регистрация",
+    "app.navigation.signOut": "Выход",
+    "app.navigation.profile": "Профиль",
+    "app.navigation.search.placeholder" : "Поиск...",
+    "app.navigation.search.errorMessage" : "Пожалуйста, введите текст"
+}

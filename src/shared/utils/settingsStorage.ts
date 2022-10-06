@@ -1,5 +1,5 @@
 import { AppTheme } from './appTheme';
-import { AppLocale } from '../localization/localization';
+import { AppLocale } from '../constants/locales';
 
 type StorageKey = typeof THEME_KEY | typeof LOCALE_KEY;
 

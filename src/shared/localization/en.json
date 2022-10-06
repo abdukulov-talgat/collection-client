@@ -1,0 +1,8 @@
+{
+    "app.navigation.signIn": "Sign in",
+    "app.navigation.signUp": "Sign Up",
+    "app.navigation.signOut": "Sign Out",
+    "app.navigation.profile": "Profile",
+    "app.navigation.search.placeholder" : "Search...",
+    "app.navigation.search.errorMessage" : "This field is required"
+}
