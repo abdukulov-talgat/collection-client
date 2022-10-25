@@ -1,0 +1,53 @@
+import React, { useEffect, useState } from 'react';
+import { Grid, List, ListItem, Typography } from '@mui/material';
+import ListItemGroup from '../../common/ListItemGroup/ListItemGroup';
+import { http } from '../../shared/http/http';
+import { apiRoutes } from '../../shared/constants/apiRoutes';
+import { ItemsEndpointEntry } from '../../types/ItemsEndpointEntry';
+import { FormattedMessage, useIntl } from 'react-intl';
+
+const LastItems = () => {
+    const [lastItems, setLastItems] = useState<ItemsEndpointEntry[]>([]);
+    const intl = useIntl();
+
+    useEffect(() => {
+        http.get(`${apiRoutes.ITEMS}?order=createdAt`).then((response) => setLastItems(response.data));
+    }, []);
+
+    return (
+        <>
+            <Typography variant="h3" component="h2">
+                <FormattedMessage id="app.lastItems.title" />
+            </Typography>
+            <List>
+                {lastItems.map((item) => (
+                    <ListItem key={item.id}>
+                        <Grid container rowGap={1}>
+                            <ListItemGroup
+                                xs={6}
+                                sm={6}
+                                title={intl.formatMessage({ id: 'app.lastItems.itemName' })}
+                                text={item.name}
+                            />
+                            <ListItemGroup
+                                justifyContent="flex-end"
+                                xs={6}
+                                sm={6}
+                                title={intl.formatMessage({ id: 'app.lastItems.collectionName' })}
+                                text={item.collectionName}
+                            />
+                            <ListItemGroup
+                                justifyContent="flex-end"
+                                xs={12}
+                                title={intl.formatMessage({ id: 'app.lastItems.userEmail' })}
+                                text={item.userEmail}
+                            />
+                        </Grid>
+                    </ListItem>
+                ))}
+            </List>
+        </>
+    );
+};
+
+export default LastItems;

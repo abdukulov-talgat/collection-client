@@ -1,7 +1,99 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Box, Button, TextField, Typography, useTheme } from '@mui/material';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useAppDispatch } from '../../shared/redux/store';
+import { signUp, SignUpCredentials } from '../../shared/redux/thunks/signUpThunk';
+import { useSelector } from 'react-redux';
+import { selectAuthState } from '../../shared/redux/authSlice';
+import { Navigate } from 'react-router-dom';
+import { appRoutes } from '../../shared/constants/appRoutes';
 
 const SignUp = () => {
-    return <div>Sign Up</div>;
+    const intl = useIntl();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        getValues,
+    } = useForm<SignUpCredentials>();
+    const theme = useTheme();
+    const dispatch = useAppDispatch();
+    const { status, error, isAuth } = useSelector(selectAuthState);
+
+    const handleFormSubmit = async (data: SignUpCredentials) => {
+        dispatch(signUp(data));
+    };
+
+    if (isAuth) {
+        return <Navigate to={appRoutes.HOME} />;
+    }
+
+    return (
+        <Box display="flex" flexDirection="column" alignItems="center">
+            <Typography variant="h3" component="h2" mb={3}>
+                <FormattedMessage id="app.form.signUp" />
+            </Typography>
+            {status === 'failed' && (
+                <Box color={theme.palette.error.main}>
+                    <FormattedMessage id={error as string} />
+                </Box>
+            )}
+            <form onSubmit={handleSubmit(handleFormSubmit)}>
+                <Box sx={{ my: 2 }}>
+                    <TextField
+                        label={intl.formatMessage({ id: 'app.form.email.label' })}
+                        error={!!errors.email}
+                        helperText={errors.email?.message}
+                        {...register('email', {
+                            required: {
+                                value: true,
+                                message: intl.formatMessage({ id: 'app.form.email.errorMessage' }),
+                            },
+                        })}
+                    />
+                </Box>
+                <Box sx={{ my: 2 }}>
+                    <TextField
+                        label={intl.formatMessage({ id: 'app.form.password.label' })}
+                        type="password"
+                        error={!!errors.password}
+                        helperText={errors.password?.message}
+                        {...register('password', {
+                            required: {
+                                value: true,
+                                message: intl.formatMessage({ id: 'app.form.password.errorMessage' }),
+                            },
+                        })}
+                    />
+                </Box>
+                <Box sx={{ my: 2 }}>
+                    <TextField
+                        label={intl.formatMessage({ id: 'app.form.passwordRepeat.label' })}
+                        type="password"
+                        error={!!errors.passwordRepeat}
+                        helperText={errors.passwordRepeat?.message}
+                        {...register('passwordRepeat', {
+                            validate: {
+                                value: (value) =>
+                                    getValues().password === value ||
+                                    intl.formatMessage({ id: 'app.form.passwordRepeat.errorMessage' }),
+                            },
+                            required: {
+                                value: true,
+                                message: intl.formatMessage({ id: 'app.form.password.errorMessage' }),
+                            },
+                        })}
+                    />
+                </Box>
+                <Box sx={{ my: 2 }}>
+                    <Button type="submit" variant="contained" fullWidth disabled={status === 'loading'}>
+                        <FormattedMessage id="app.form.signUpButton" />
+                    </Button>
+                </Box>
+            </form>
+        </Box>
+    );
 };
 
 export default SignUp;

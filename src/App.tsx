@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { unstable_HistoryRouter as HistoryRouter, Route, Routes } from 'react-router-dom';
 import Layout from './common/Layout/Layout';
-import { routes } from './shared/constants/routes';
+import { appRoutes } from './shared/constants/appRoutes';
 import Home from './app/Home/Home';
 import SignIn from './app/SignIn/SignIn';
 import SignUp from './app/SignUp/SignUp';
@@ -11,9 +11,9 @@ import { useMemo } from 'react';
 import { createAppTheme } from './shared/utils/appTheme';
 import { IntlProvider } from 'react-intl';
 import { messages } from './shared/constants/locales';
-
-// Last 5 Items (CollectionName, Collection, Author) 5 Biggest
-// Collections Tag Clouds
+import { history } from './shared/constants/history';
+import Admin from './app/Admin/Admin';
+import EditUser from './app/Admin/EditUser/EditUser';
 
 function App() {
     const themeValue = useSelector(selectTheme);
@@ -28,15 +28,17 @@ function App() {
             <IntlProvider locale={locale} messages={messages[locale]}>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
-                    <BrowserRouter>
+                    <HistoryRouter history={history}>
                         <Routes>
-                            <Route path={routes.HOME} element={<Layout />}>
+                            <Route path={appRoutes.HOME} element={<Layout />}>
                                 <Route index element={<Home />} />
-                                <Route path={routes.SIGNIN} element={<SignIn />} />
-                                <Route path={routes.SIGNUP} element={<SignUp />} />
+                                <Route path={appRoutes.SIGNIN} element={<SignIn />} />
+                                <Route path={appRoutes.SIGNUP} element={<SignUp />} />
+                                <Route path={appRoutes.ADMIN} element={<Admin />} />
+                                <Route path={`${appRoutes.EDIT_USER}/:id`} element={<EditUser />} />
                             </Route>
                         </Routes>
-                    </BrowserRouter>
+                    </HistoryRouter>
                 </ThemeProvider>
             </IntlProvider>
         </>

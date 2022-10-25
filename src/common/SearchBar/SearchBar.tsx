@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { Search } from './StyledSearch';
 import { SearchIconWrapper } from './StyledSearchIconWrapper';
@@ -19,7 +19,7 @@ const SearchBar = () => {
     } = useForm<SearchInputs>();
     const intl = useIntl();
 
-    const handleFormSubmit: SubmitHandler<SearchInputs> = (data) => {
+    const handleFormSubmit = (data: SearchInputs) => {
         alert(JSON.stringify(data));
     };
 
