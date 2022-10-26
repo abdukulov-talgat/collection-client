@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { history } from '../constants/history';
 import { getAccessToken, saveAccessToken } from '../utils/settingsStorage';
 import { apiRoutes } from '../constants/apiRoutes';
@@ -7,13 +7,11 @@ import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import { initSignIn, signOut } from '../redux/authSlice';
 import jwtDecode from 'jwt-decode';
 
-const refreshAuthLogic = async (failedRequest: any) => {
+const refreshAuthLogic = async (failedRequest: AxiosError) => {
     try {
-        //TODO: FIX BUG WITH NOT USING REFRESHED TOKEN AFTER FIRST CLICK
         const tokenRefreshResponse = await axios.get(apiRoutes.REFRESH);
         saveAccessToken(tokenRefreshResponse.data.accessToken);
         store.dispatch(initSignIn(jwtDecode(tokenRefreshResponse.data.accessToken)));
-        failedRequest.response.config.headers['Authorization'] = 'Bearer ' + tokenRefreshResponse.data.accessToken;
         return Promise.resolve();
     } catch (e) {
         store.dispatch(signOut());
@@ -29,6 +27,7 @@ http.interceptors.request.use(
         if (token) {
             config.headers = {
                 Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json', // Without this row "axios" second try sent text/plain.
             };
         }
         return config;

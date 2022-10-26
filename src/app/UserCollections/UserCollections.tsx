@@ -12,13 +12,12 @@ interface UserCollectionsProps {
 
 const UserCollections = ({ profileId }: UserCollectionsProps) => {
     const [collections, setCollections] = useState<Collection[]>([]);
-    const [page, setPage] = useState(1);
 
     useEffect(() => {
         http.get(`${apiRoutes.COLLECTIONS}?userId=${profileId}`).then((response) => {
             setCollections(response.data);
         });
-    }, [profileId, page]);
+    }, [profileId]);
 
     return (
         <>
