@@ -15,7 +15,7 @@ import { history } from './shared/constants/history';
 import Admin from './app/Admin/Admin';
 import EditUser from './app/Admin/EditUser/EditUser';
 import Profile from './app/Profile/Profile';
-import UserCollectionItems from './app/UserCollectiomItems/UserCollectionItems';
+import CollectionShow from './app/CollectionShow/CollectionShow';
 import CollectionCreate from './app/CollectionCreate/CollectionCreate';
 
 function App() {
@@ -39,10 +39,7 @@ function App() {
                                 <Route path={appRoutes.SIGNUP} element={<SignUp />} />
                                 <Route path={`${appRoutes.PROFILE}/:id`} element={<Profile />} />
                                 <Route path={`${appRoutes.COLLECTION_CREATE}`} element={<CollectionCreate />} />
-                                <Route
-                                    path={`${appRoutes.CONCRETE_COLLECTION}/:id`}
-                                    element={<UserCollectionItems />}
-                                />
+                                <Route path={`${appRoutes.CONCRETE_COLLECTION}/:id`} element={<CollectionShow />} />
                                 {/*withAdmin*/}
                                 <Route path={appRoutes.ADMIN} element={<Admin />} />
                                 <Route path={`${appRoutes.EDIT_USER}/:id`} element={<EditUser />} />

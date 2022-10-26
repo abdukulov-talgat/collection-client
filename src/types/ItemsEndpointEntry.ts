@@ -13,10 +13,14 @@ export interface ItemsEndpointEntry {
     userEmail: string;
 }
 
-export interface Collection {
+export interface Collection extends ConcreteCollection {
+    itemsCount: number;
+}
+
+export interface ConcreteCollection {
     id: number;
     name: string;
-    itemsCount: number;
+    imageSrc: string;
     customColumns?: string;
     description: string;
     userId: number;

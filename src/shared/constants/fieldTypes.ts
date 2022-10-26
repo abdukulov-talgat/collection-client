@@ -4,4 +4,4 @@ export const fieldTypes = {
     TEXT: 'text',
     BOOLEAN: 'boolean',
     DATE: 'date',
-};
+} as const;

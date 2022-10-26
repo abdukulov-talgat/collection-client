@@ -5,13 +5,14 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface SelectFieldTypeProps {
     register: UseFormRegisterReturn;
+    defaultValue: string;
 }
 
-const SelectFieldType = ({ register }: SelectFieldTypeProps) => {
+const SelectFieldType = ({ register, defaultValue }: SelectFieldTypeProps) => {
     return (
         <FormControl sx={{ minWidth: 150 }}>
             <InputLabel>Field type</InputLabel>
-            <Select defaultValue={fieldTypes.STRING} {...register} label="Field type">
+            <Select defaultValue={defaultValue} {...register} label="Field type">
                 {Object.values(fieldTypes).map((fieldType) => (
                     <MenuItem key={fieldType} value={fieldType}>
                         {fieldType}

@@ -6,17 +6,45 @@ import { http } from '../../shared/http/http';
 import withAuth from '../../hocs/withAuth';
 import SelectFieldType from '../../common/SelectFieldType/SelectFieldType';
 import SelectTopic from '../../common/SelectTopic/SelectTopic';
+import { fieldTypes } from '../../shared/constants/fieldTypes';
+
+interface CollectionCreateInputs {
+    userId: number;
+    name: string;
+    description: string;
+    topicId: number;
+    img: File[];
+    customColumns: {
+        name: string;
+        type: typeof fieldTypes[keyof typeof fieldTypes];
+    }[];
+}
 
 const CollectionCreate = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
-    const { register, control, handleSubmit } = useForm();
+    const { register, control, handleSubmit } = useForm<CollectionCreateInputs>();
     const { append, fields } = useFieldArray({ name: 'customColumns', control: control });
 
-    const handleFormSubmit = (data: any) => {
-        http.post('/collections', data).then((response) => {
+    const handleFormSubmit = (data: CollectionCreateInputs) => {
+        const formData = prepareFormData(data);
+
+        http.post('/collections', formData).then(() => {
             navigate(-1);
         });
+    };
+
+    const prepareFormData = (data: CollectionCreateInputs) => {
+        const formData = new FormData();
+        formData.set('name', data.name);
+        formData.set('description', data.description);
+        formData.set('userId', data.userId.toString());
+        formData.set('topicId', data.topicId.toString());
+        formData.set('customColumns', JSON.stringify(data.customColumns));
+        if (data.img && data.img[0]) {
+            formData.set('img', data.img[0]);
+        }
+        return formData;
     };
 
     return (
@@ -38,12 +66,15 @@ const CollectionCreate = () => {
                         <TextField
                             sx={{ flexGrow: 1 }}
                             label="Field Name"
-                            {...register(`customColumns.${i}.name`, { required: true })}
+                            {...register(`customColumns.${i}.name` as const, { required: true })}
                         />
-                        <SelectFieldType register={register(`customColumns.${i}.type`, { required: true })} />
+                        <SelectFieldType
+                            defaultValue={f.type}
+                            register={register(`customColumns.${i}.type` as const, { required: true })}
+                        />
                     </Box>
                 ))}
-                <Button type="button" onClick={() => append({})}>
+                <Button type="button" onClick={() => append({ name: '', type: fieldTypes.STRING })}>
                     Add field
                 </Button>
                 <Button type="submit" variant="contained">

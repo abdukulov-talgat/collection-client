@@ -27,7 +27,7 @@ http.interceptors.request.use(
         if (token) {
             config.headers = {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json', // Without this row "axios" second try sent text/plain.
+                // 'Content-Type': 'application/json', // Without this row "axios" second try sent text/plain.
             };
         }
         return config;
