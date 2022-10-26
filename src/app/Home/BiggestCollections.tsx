@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, List, ListItem, Typography } from '@mui/material';
+import { Grid, Link, List, ListItem, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import ListItemGroup from '../../common/ListItemGroup/ListItemGroup';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
 import { Collection } from '../../types/ItemsEndpointEntry';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { appRoutes } from '../../shared/constants/appRoutes';
 
 const COLLECTIONS_TO_SHOW = 5;
 
@@ -27,19 +29,19 @@ const BiggestCollections = () => {
                 {collections.map((collection) => (
                     <ListItem key={collection.id}>
                         <Grid container rowGap={1}>
-                            <ListItemGroup
-                                xs={6}
-                                sm={6}
-                                title={intl.formatMessage({ id: 'app.biggest.name' })}
-                                text={collection.name}
-                            />
+                            <ListItemGroup xs={6} sm={6} title={intl.formatMessage({ id: 'app.biggest.name' })}>
+                                <Link component={RouterLink} to={`${appRoutes.CONCRETE_COLLECTION}/${collection.id}`}>
+                                    {collection.name}
+                                </Link>
+                            </ListItemGroup>
                             <ListItemGroup
                                 justifyContent="flex-end"
                                 xs={6}
                                 sm={6}
                                 title={intl.formatMessage({ id: 'app.biggest.count' })}
-                                text={collection.itemsCount.toString()}
-                            />
+                            >
+                                {collection.itemsCount.toString()}
+                            </ListItemGroup>
                         </Grid>
                     </ListItem>
                 ))}

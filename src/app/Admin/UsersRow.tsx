@@ -1,6 +1,6 @@
 import React from 'react';
 import { User } from '../../types/User';
-import { Button, TableCell, TableRow } from '@mui/material';
+import { Button, Link, TableCell, TableRow } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { Link as RouterLink } from 'react-router-dom';
 import { appRoutes } from '../../shared/constants/appRoutes';
@@ -13,7 +13,11 @@ const UsersRow = ({ user }: UsersRowProps) => {
     return (
         <TableRow>
             <TableCell>{user.id}</TableCell>
-            <TableCell>{user.email}</TableCell>
+            <TableCell>
+                <Link component={RouterLink} to={`${appRoutes.PROFILE}/${user.id}`}>
+                    {user.email}
+                </Link>
+            </TableCell>
             <TableCell>
                 <FormattedMessage id={user.isBanned ? 'app.admin.users.isBanned.yes' : 'app.admin.users.isBanned.no'} />
             </TableCell>

@@ -7,6 +7,7 @@ const apiRoutes = {
     ITEMS: '/items',
     TAGS: '/tags',
     USERS: '/users',
+    TOPICS: '/topics',
 };
 
 export { apiRoutes };

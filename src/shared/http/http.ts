@@ -9,6 +9,7 @@ import jwtDecode from 'jwt-decode';
 
 const refreshAuthLogic = async (failedRequest: any) => {
     try {
+        //TODO: FIX BUG WITH NOT USING REFRESHED TOKEN AFTER FIRST CLICK
         const tokenRefreshResponse = await axios.get(apiRoutes.REFRESH);
         saveAccessToken(tokenRefreshResponse.data.accessToken);
         store.dispatch(initSignIn(jwtDecode(tokenRefreshResponse.data.accessToken)));

@@ -23,25 +23,24 @@ const LastItems = () => {
                 {lastItems.map((item) => (
                     <ListItem key={item.id}>
                         <Grid container rowGap={1}>
-                            <ListItemGroup
-                                xs={6}
-                                sm={6}
-                                title={intl.formatMessage({ id: 'app.lastItems.itemName' })}
-                                text={item.name}
-                            />
+                            <ListItemGroup xs={6} sm={6} title={intl.formatMessage({ id: 'app.lastItems.itemName' })}>
+                                {item.name}
+                            </ListItemGroup>
                             <ListItemGroup
                                 justifyContent="flex-end"
                                 xs={6}
                                 sm={6}
                                 title={intl.formatMessage({ id: 'app.lastItems.collectionName' })}
-                                text={item.collectionName}
-                            />
+                            >
+                                {item.collectionName}
+                            </ListItemGroup>
                             <ListItemGroup
                                 justifyContent="flex-end"
                                 xs={12}
                                 title={intl.formatMessage({ id: 'app.lastItems.userEmail' })}
-                                text={item.userEmail}
-                            />
+                            >
+                                {item.userEmail}
+                            </ListItemGroup>
                         </Grid>
                     </ListItem>
                 ))}
