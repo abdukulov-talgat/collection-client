@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
@@ -7,6 +7,7 @@ import withAuth from '../../hocs/withAuth';
 import SelectFieldType from '../../common/SelectFieldType/SelectFieldType';
 import SelectTopic from '../../common/SelectTopic/SelectTopic';
 import { fieldTypes } from '../../shared/constants/fieldTypes';
+import MDEditor from '@uiw/react-md-editor';
 
 interface CollectionCreateInputs {
     userId: number;
@@ -22,13 +23,13 @@ interface CollectionCreateInputs {
 
 const CollectionCreate = () => {
     const { state } = useLocation();
+    const [description, setDescription] = useState<string | undefined>();
     const navigate = useNavigate();
     const { register, control, handleSubmit } = useForm<CollectionCreateInputs>();
     const { append, fields } = useFieldArray({ name: 'customColumns', control: control });
 
     const handleFormSubmit = (data: CollectionCreateInputs) => {
         const formData = prepareFormData(data);
-
         http.post('/collections', formData).then(() => {
             navigate(-1);
         });
@@ -37,7 +38,7 @@ const CollectionCreate = () => {
     const prepareFormData = (data: CollectionCreateInputs) => {
         const formData = new FormData();
         formData.set('name', data.name);
-        formData.set('description', data.description);
+        formData.set('description', description || '');
         formData.set('userId', data.userId.toString());
         formData.set('topicId', data.topicId.toString());
         formData.set('customColumns', JSON.stringify(data.customColumns));
@@ -53,7 +54,7 @@ const CollectionCreate = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <input type="hidden" {...register('userId')} value={state.userId} />
                 <TextField label="Name" {...register('name', { required: true })} />
-                <TextField label="Description" {...register('description', { required: true })} multiline rows={5} />
+                <MDEditor value={description} onChange={setDescription} />
                 <SelectTopic register={register('topicId', { required: true })} />
                 <TextField
                     type="file"
