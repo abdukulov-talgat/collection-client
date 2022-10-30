@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, IconButton } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { appRoutes } from '../../shared/constants/appRoutes';
-import { ConcreteCollection } from '../../types/Item';
+import { ConcreteCollection } from '../../types/ConcreteCollection';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
 import DeleteIcon from '@mui/icons-material/Delete';

@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import ListItemGroup from '../../common/ListItemGroup/ListItemGroup';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { Collection } from '../../types/Item';
+import { Collection } from '../../types/Collection';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { appRoutes } from '../../shared/constants/appRoutes';
 

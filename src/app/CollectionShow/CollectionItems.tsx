@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { ConcreteCollection } from '../../types/Item';
+import { ConcreteCollection } from '../../types/ConcreteCollection';
 import { DataGrid } from '@mui/x-data-grid';
 import { ItemsDataGridHelper } from '../../shared/utils/ItemsDataGridHelper';
 import { useNavigate } from 'react-router-dom';

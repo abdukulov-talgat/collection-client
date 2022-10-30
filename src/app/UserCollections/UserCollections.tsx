@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { Collection } from '../../types/Item';
+import { Collection } from '../../types/Collection';
 import { Button, Link, List, ListItem } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { appRoutes } from '../../shared/constants/appRoutes';

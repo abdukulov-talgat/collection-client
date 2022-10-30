@@ -1,4 +1,4 @@
-import { ConcreteItem } from '../../types/Item';
+import { ConcreteItem } from '../../types/ConcreteItem';
 import { CustomFieldSchema } from '../../types/CustomFieldSchema';
 import { humanizeCustomField } from './humanizeCustomField';
 

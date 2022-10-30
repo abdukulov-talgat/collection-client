@@ -2,13 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { ConcreteItem } from '../../types/Item';
-import { Box, Chip, CircularProgress, Divider, Grid, IconButton } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { ItemShowColumnHelper } from '../../shared/utils/ItemShowColumnHelper';
-import ItemShowRow from './ItemShowRow';
-import { useIntl } from 'react-intl';
-import ItemShowDivider from './ItemShowDivider';
+import { ConcreteItem } from '../../types/ConcreteItem';
+import { Box, CircularProgress } from '@mui/material';
 import ItemShowDetails from './ItemShowDetails';
 import ItemShowComments from './ItemShowComments';
 

@@ -3,7 +3,7 @@ import ItemShowRow from './ItemShowRow';
 import { Box, Chip, Grid, IconButton } from '@mui/material';
 import ItemShowDivider from './ItemShowDivider';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { ConcreteItem } from '../../types/Item';
+import { ConcreteItem } from '../../types/ConcreteItem';
 import { useIntl } from 'react-intl';
 import { ItemShowColumnHelper } from '../../shared/utils/ItemShowColumnHelper';
 

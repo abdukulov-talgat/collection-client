@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConcreteCollection } from '../../types/Item';
+import { ConcreteCollection } from '../../types/ConcreteCollection';
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 import MDEditor from '@uiw/react-md-editor';
 import CollectionDetailsControls from './CollectionDetailsControls';

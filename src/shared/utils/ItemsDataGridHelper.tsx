@@ -1,8 +1,9 @@
-import { ConcreteCollection, Item } from '../../types/Item';
+import { Item } from '../../types/Item';
 import { GridColDef } from '@mui/x-data-grid';
 import { CustomFieldSchema } from '../../types/CustomFieldSchema';
 import { extractTags } from './extractTags';
 import { humanizeCustomField } from './humanizeCustomField';
+import { ConcreteCollection } from '../../types/ConcreteCollection';
 
 export class ItemsDataGridHelper {
     private collection: ConcreteCollection;

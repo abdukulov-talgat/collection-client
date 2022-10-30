@@ -4,7 +4,7 @@ import CollectionDetails from './CollectionDetails';
 import CollectionItems from './CollectionItems';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { ConcreteCollection } from '../../types/Item';
+import { ConcreteCollection } from '../../types/ConcreteCollection';
 import { CircularProgress } from '@mui/material';
 
 const CollectionShow = () => {
