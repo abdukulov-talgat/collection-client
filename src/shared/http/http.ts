@@ -1,34 +1,17 @@
-import axios, { AxiosError } from 'axios';
-import { history } from '../constants/history';
+import axios from 'axios';
 import { getAccessToken, saveAccessToken } from '../utils/settingsStorage';
 import { apiRoutes } from '../constants/apiRoutes';
 import store from '../redux/store';
-import createAuthRefreshInterceptor from 'axios-auth-refresh';
-import { initSignIn, signOut } from '../redux/authSlice';
+import { initSignIn } from '../redux/authSlice';
 import jwtDecode from 'jwt-decode';
-
-const refreshAuthLogic = async (failedRequest: AxiosError) => {
-    try {
-        const tokenRefreshResponse = await axios.get(apiRoutes.REFRESH);
-        saveAccessToken(tokenRefreshResponse.data.accessToken);
-        store.dispatch(initSignIn(jwtDecode(tokenRefreshResponse.data.accessToken)));
-        return Promise.resolve();
-    } catch (e) {
-        store.dispatch(signOut());
-        return Promise.reject();
-    }
-};
 
 const http = axios.create();
 
 http.interceptors.request.use(
     (config) => {
         const token = getAccessToken();
-        if (token) {
-            config.headers = {
-                Authorization: `Bearer ${token}`,
-                // 'Content-Type': 'application/json', // Without this row "axios" second try sent text/plain.
-            };
+        if (token && config.headers) {
+            config.headers['Authorization'] = `Bearer ${token}`;
         }
         return config;
     },
@@ -37,31 +20,29 @@ http.interceptors.request.use(
     }
 );
 
-createAuthRefreshInterceptor(http, refreshAuthLogic);
-
-// http.interceptors.response.use(
-//     (response) => {
-//         return response;
-//     },
-//     async (error: unknown) => {
-//         if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
-//             try {
-//                 const response = await axios.get(apiRoutes.REFRESH);
-//                 saveAccessToken(response.data.accessToken);
-//                 console.log('BEFORE TRY AGAIN');
-//                 const tryAgainResponse = await axios({
-//                     data: error.config?.data,
-//                     method: error.config?.method,
-//                     headers: { kkk: `Bearer ${getAccessToken()}` },
-//                 });
-//                 console.log('AFTER TRY AGAIN');
-//                 return Promise.resolve(tryAgainResponse.data);
-//             } catch (e) {
-//                 history.push(appRoutes.SIGNIN);
-//             }
-//         }
-//         return Promise.reject(error);
-//     }
-// );
+http.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        try {
+            if (axios.isAxiosError(error) && error.response && error.response.status === 401 && error.config) {
+                const tokenRefreshResponse = await axios.get(apiRoutes.REFRESH);
+                saveAccessToken(tokenRefreshResponse.data.accessToken);
+                store.dispatch(initSignIn(jwtDecode(tokenRefreshResponse.data.accessToken)));
+                const options = {
+                    headers: {
+                        Authorization: `Bearer ${tokenRefreshResponse.data.accessToken}`,
+                        'Content-Type': (error.config.headers && error.config.headers['Content-Type']) || 'text/plain',
+                    },
+                    method: error.config.method,
+                    data: error.config.data,
+                    url: error.config.url,
+                };
+                return await axios(options);
+            }
+        } catch (e) {
+            //???
+        }
+    }
+);
 
 export { http };
