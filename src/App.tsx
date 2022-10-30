@@ -17,6 +17,8 @@ import EditUser from './app/Admin/EditUser/EditUser';
 import Profile from './app/Profile/Profile';
 import CollectionShow from './app/CollectionShow/CollectionShow';
 import CollectionCreate from './app/CollectionCreate/CollectionCreate';
+import ItemCreate from './app/ItemCreate/ItemCreate';
+import ItemShow from './app/ItemShow/ItemShow';
 
 function App() {
     const themeValue = useSelector(selectTheme);
@@ -38,8 +40,11 @@ function App() {
                                 <Route path={appRoutes.SIGNIN} element={<SignIn />} />
                                 <Route path={appRoutes.SIGNUP} element={<SignUp />} />
                                 <Route path={`${appRoutes.PROFILE}/:id`} element={<Profile />} />
+                                <Route path={`${appRoutes.COLLECTION_ROOT}/:id`} element={<CollectionShow />} />
+                                <Route path={`${appRoutes.ITEM_ROOT}/:id`} element={<ItemShow />} />
+                                {/*withAuth*/}
                                 <Route path={`${appRoutes.COLLECTION_CREATE}`} element={<CollectionCreate />} />
-                                <Route path={`${appRoutes.CONCRETE_COLLECTION}/:id`} element={<CollectionShow />} />
+                                <Route path={`${appRoutes.ITEM_CREATE}`} element={<ItemCreate />} />
                                 {/*withAdmin*/}
                                 <Route path={appRoutes.ADMIN} element={<Admin />} />
                                 <Route path={`${appRoutes.EDIT_USER}/:id`} element={<EditUser />} />

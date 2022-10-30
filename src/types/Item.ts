@@ -2,16 +2,30 @@ import { Tag } from './Tag';
 
 //TODO: Split to separate files
 
-export interface ItemsEndpointEntry {
+export interface Item {
     id: number;
     name: string;
-    customColumns?: string;
+    customColumns: Record<string, any>;
+    collectionId: number;
     createdAt: string;
     tags: Tag[];
-    collectionId: number;
     collectionName: string;
     userEmail: string;
 }
+
+export interface ConcreteItem {
+    id: number;
+    name: string;
+    customColumns: Record<string, any>;
+    collectionId: number;
+    createdAt: string;
+    collection: Collection & { user: { id: number; email: string } };
+    tags: Tag[];
+    likesCount: number;
+    alreadyLiked: boolean;
+}
+
+// const item: ConcreteItem = null;
 
 export interface Collection extends ConcreteCollection {
     itemsCount: number;
