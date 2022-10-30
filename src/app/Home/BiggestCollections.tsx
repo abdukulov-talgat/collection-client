@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import ListItemGroup from '../../common/ListItemGroup/ListItemGroup';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { Collection } from '../../types/ItemsEndpointEntry';
+import { Collection } from '../../types/Item';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { appRoutes } from '../../shared/constants/appRoutes';
 
@@ -30,7 +30,7 @@ const BiggestCollections = () => {
                     <ListItem key={collection.id}>
                         <Grid container rowGap={1}>
                             <ListItemGroup xs={6} sm={6} title={intl.formatMessage({ id: 'app.biggest.name' })}>
-                                <Link component={RouterLink} to={`${appRoutes.CONCRETE_COLLECTION}/${collection.id}`}>
+                                <Link component={RouterLink} to={`${appRoutes.COLLECTION_ROOT}/${collection.id}`}>
                                     {collection.name}
                                 </Link>
                             </ListItemGroup>

@@ -3,15 +3,15 @@ import { Grid, List, ListItem, Typography } from '@mui/material';
 import ListItemGroup from '../../common/ListItemGroup/ListItemGroup';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { ItemsEndpointEntry } from '../../types/ItemsEndpointEntry';
+import { Item } from '../../types/Item';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 const LastItems = () => {
-    const [lastItems, setLastItems] = useState<ItemsEndpointEntry[]>([]);
+    const [lastItems, setLastItems] = useState<Item[]>([]);
     const intl = useIntl();
 
     useEffect(() => {
-        http.get(`${apiRoutes.ITEMS}?order=createdAt`).then((response) => setLastItems(response.data));
+        http.get(`${apiRoutes.ITEMS}?order=createdAt`).then((response) => setLastItems(response.data.slice(0, 5)));
     }, []);
 
     return (

@@ -16,6 +16,7 @@
     "app.form.passwordRepeat.errorMessage": "Passwords doesnt match",
     "app.form.wrongCredentials": "Wrong email or password",
     "app.form.error": "Something went wrong",
+    "app.form.required": "This field is required",
     "app.biggest.title": "Biggest collections",
     "app.biggest.name": "Name",
     "app.biggest.count": "Items count",
@@ -32,5 +33,11 @@
     "app.admin.users.isBanned.yes": "Blocked",
     "app.admin.users.isBanned.no": "Freeman",
     "app.admin.users.editTitle": "Edit user",
-    "app.button.submit": "Submit"
+    "app.button.submit": "Submit",
+    "app.item-show.name": "Name",
+    "app.item-show.tags": "Tags",
+    "app.item-show.topic": "Topic",
+    "app.item-show.user": "Item Owner",
+    "app.dictionary.yes": "Yes",
+    "app.dictionary.no": "No"
 }

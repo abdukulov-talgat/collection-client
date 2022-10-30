@@ -3,7 +3,7 @@ import withAdminRole from '../../../hocs/withAdminRole';
 import { useNavigate, useParams } from 'react-router-dom';
 import { http } from '../../../shared/http/http';
 import { apiRoutes } from '../../../shared/constants/apiRoutes';
-import { Box, Button, ButtonGroup, Checkbox, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, TextField, Typography } from '@mui/material';
 import { User } from '../../../types/User';
 import { FormattedMessage } from 'react-intl/lib';
 import { useIntl } from 'react-intl';
@@ -11,9 +11,6 @@ import { isAdmin } from '../../../shared/utils/authHelpers';
 import { useForm } from 'react-hook-form';
 import { appRoutes } from '../../../shared/constants/appRoutes';
 import { Link as RouterLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectAuthState, signOut } from '../../../shared/redux/authSlice';
-import { useAppDispatch } from '../../../shared/redux/store';
 
 interface UserEditInputs {
     id: number;

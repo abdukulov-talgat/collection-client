@@ -8,6 +8,7 @@ import SelectFieldType from '../../common/SelectFieldType/SelectFieldType';
 import SelectTopic from '../../common/SelectTopic/SelectTopic';
 import { fieldTypes } from '../../shared/constants/fieldTypes';
 import MDEditor from '@uiw/react-md-editor';
+import { getTopics } from '../../shared/constants/topics';
 
 interface CollectionCreateInputs {
     userId: number;
@@ -50,17 +51,16 @@ const CollectionCreate = () => {
 
     return (
         <form onSubmit={handleSubmit(handleFormSubmit)}>
-            <div>{JSON.stringify(state)}</div>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <input type="hidden" {...register('userId')} value={state.userId} />
                 <TextField label="Name" {...register('name', { required: true })} />
                 <MDEditor value={description} onChange={setDescription} />
-                <SelectTopic register={register('topicId', { required: true })} />
+                <SelectTopic register={register('topicId', { required: true })} defaultValue={getTopics()[0].value} />
                 <TextField
                     type="file"
                     {...register('img')}
                     hidden
-                    InputProps={{ inputProps: { accept: 'image/jpg,image/png' } }}
+                    InputProps={{ inputProps: { accept: 'image/jpg,image/jpeg,image/png' } }}
                 />
                 {fields.map((f, i) => (
                     <Box key={f.id} sx={{ display: 'flex', gap: 3 }}>
@@ -75,12 +75,18 @@ const CollectionCreate = () => {
                         />
                     </Box>
                 ))}
-                <Button type="button" onClick={() => append({ name: '', type: fieldTypes.STRING })}>
-                    Add field
-                </Button>
-                <Button type="submit" variant="contained">
-                    Submit
-                </Button>
+                <Box sx={{ display: 'flex', gap: '1em' }}>
+                    <Button
+                        type="button"
+                        variant="outlined"
+                        onClick={() => append({ name: '', type: fieldTypes.STRING })}
+                    >
+                        Add field
+                    </Button>
+                    <Button type="submit" variant="contained">
+                        Submit
+                    </Button>
+                </Box>
             </Box>
         </form>
     );

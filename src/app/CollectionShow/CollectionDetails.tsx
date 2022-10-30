@@ -1,32 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { http } from '../../shared/http/http';
-import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { ConcreteCollection } from '../../types/ItemsEndpointEntry';
-import { Box, CircularProgress, Grid, Typography } from '@mui/material';
-import ReactMarkdown from 'react-markdown';
+import React from 'react';
+import { ConcreteCollection } from '../../types/Item';
+import { Box, Grid, Typography, useTheme } from '@mui/material';
 import MDEditor from '@uiw/react-md-editor';
+import CollectionDetailsControls from './CollectionDetailsControls';
 
 interface CollectionDetailsProps {
-    collectionId: number;
+    collection: ConcreteCollection;
 }
 
-const CollectionDetails = ({ collectionId }: CollectionDetailsProps) => {
-    const [collection, setCollection] = useState<ConcreteCollection | null>(null);
+const CollectionDetails = ({ collection }: CollectionDetailsProps) => {
+    const theme = useTheme();
 
-    useEffect(() => {
-        http.get(`${apiRoutes.COLLECTIONS}/${collectionId}`).then((response) => {
-            setCollection(response.data);
-        });
-    }, [collectionId]);
-
-    return collection ? (
+    return (
         <Grid container columnSpacing={2} rowSpacing={1}>
             <Grid item sm={12}>
                 <Typography variant="h3" component="h2">
-                    Name: {collection.name}
+                    {collection.name}
                 </Typography>
                 <Typography variant="h4" component="h4">
-                    Topic: {collection.topic.value}
+                    {collection.topic.value}
                 </Typography>
             </Grid>
             <Grid item sm={12} md={4}>
@@ -35,13 +27,17 @@ const CollectionDetails = ({ collectionId }: CollectionDetailsProps) => {
                 )}
             </Grid>
             <Grid item sm={12} md={8}>
-                <Typography>Description:</Typography>
-                <MDEditor.Markdown source={collection.description} style={{ whiteSpace: 'pre-wrap' }} />
-                <ReactMarkdown>{collection.description}</ReactMarkdown>
+                <MDEditor.Markdown
+                    source={collection.description}
+                    style={{
+                        whiteSpace: 'pre-wrap',
+                        backgroundColor: theme.palette.background.default,
+                        color: theme.palette.text.primary,
+                    }}
+                />
             </Grid>
+            <CollectionDetailsControls collection={collection} />
         </Grid>
-    ) : (
-        <CircularProgress />
     );
 };
 

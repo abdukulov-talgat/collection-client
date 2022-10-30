@@ -5,14 +5,17 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface SelectTopicProps {
     register: UseFormRegisterReturn;
+    defaultValue: string;
 }
 
-const SelectTopic = ({ register }: SelectTopicProps) => {
+const SelectTopic = ({ register, defaultValue }: SelectTopicProps) => {
     const topics = getTopics();
+    let index = topics.findIndex((t) => t.value === defaultValue);
+    index = index === -1 ? 0 : index;
 
     return (
         <FormControl>
-            <Select defaultValue={topics[0].id} {...register}>
+            <Select defaultValue={topics[index].id} {...register}>
                 {topics.map((t) => (
                     <MenuItem key={t.id} value={t.id}>
                         {t.value}

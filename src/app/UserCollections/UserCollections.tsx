@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
-import { Collection } from '../../types/ItemsEndpointEntry';
+import { Collection } from '../../types/Item';
 import { Button, Link, List, ListItem } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { appRoutes } from '../../shared/constants/appRoutes';
@@ -24,7 +24,7 @@ const UserCollections = ({ profileId }: UserCollectionsProps) => {
             <List>
                 {collections.map((c) => (
                     <ListItem key={c.id}>
-                        <Link component={RouterLink} to={`${appRoutes.CONCRETE_COLLECTION}/${c.id}`}>
+                        <Link component={RouterLink} to={`${appRoutes.COLLECTION_ROOT}/${c.id}`}>
                             {c.name}
                         </Link>
                     </ListItem>

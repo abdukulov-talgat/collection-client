@@ -16,6 +16,7 @@
     "app.form.passwordRepeat.errorMessage": "Пароли не совпадают",
     "app.form.wrongCredentials": "Неправильный email или пароль",
     "app.form.error": "Что-то пошло не так",
+    "app.form.required": "Обязательное поле",
     "app.biggest.title": "Крупнейшие коллекции",
     "app.biggest.name": "Название",
     "app.biggest.count": "Количество",
@@ -32,5 +33,11 @@
     "app.admin.users.isBanned.yes": "Заблокирован",
     "app.admin.users.isBanned.no": "Свободен",
     "app.admin.users.editTitle": "Редактировать пользователя",
-    "app.button.submit": "Отправить"
+    "app.button.submit": "Отправить",
+    "app.item-show.name": "Название",
+    "app.item-show.tags": "Тэги",
+    "app.item-show.topic": "Тема",
+    "app.item-show.user": "Владелец",
+    "app.dictionary.yes": "Да",
+    "app.dictionary.no": "Нет"
 }
