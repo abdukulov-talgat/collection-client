@@ -34,10 +34,14 @@
     "app.admin.users.isBanned.no": "Freeman",
     "app.admin.users.editTitle": "Edit user",
     "app.button.submit": "Submit",
-    "app.item-show.name": "Name",
-    "app.item-show.tags": "Tags",
-    "app.item-show.topic": "Topic",
-    "app.item-show.user": "Item Owner",
+    "app.itemShow.name": "Name",
+    "app.itemShow.tags": "Tags",
+    "app.itemShow.topic": "Topic",
+    "app.itemShow.user": "Item Owner",
+    "app.commentForm.title": "Add comment",
+    "app.commentForm.message": "Message",
+    "app.commentList.title": "Comment list",
+    "app.commentList.author": "from",
     "app.dictionary.yes": "Yes",
     "app.dictionary.no": "No"
 }

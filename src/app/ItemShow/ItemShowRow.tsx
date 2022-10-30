@@ -12,7 +12,7 @@ const ItemShowRow = ({ name, value }: ItemShowRowProps) => {
             <Typography variant="h5" component="h3">
                 {name}
             </Typography>
-            <Typography>{value}</Typography>
+            <Typography component="div">{value}</Typography>
         </Grid>
     );
 };

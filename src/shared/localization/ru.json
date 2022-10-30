@@ -34,10 +34,14 @@
     "app.admin.users.isBanned.no": "Свободен",
     "app.admin.users.editTitle": "Редактировать пользователя",
     "app.button.submit": "Отправить",
-    "app.item-show.name": "Название",
-    "app.item-show.tags": "Тэги",
-    "app.item-show.topic": "Тема",
-    "app.item-show.user": "Владелец",
+    "app.itemShow.name": "Название",
+    "app.itemShow.tags": "Тэги",
+    "app.itemShow.topic": "Тема",
+    "app.itemShow.user": "Владелец",
+    "app.commentForm.title": "Добавить комментарий",
+    "app.commentForm.message": "Сообщение",
+    "app.commentList.title": "Список комментариев",
+    "app.commentList.author": "От",
     "app.dictionary.yes": "Да",
     "app.dictionary.no": "Нет"
 }

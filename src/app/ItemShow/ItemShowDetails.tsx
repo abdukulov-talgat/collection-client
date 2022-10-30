@@ -17,9 +17,9 @@ const ItemShowDetails = ({ item }: ItemShowDetailsProps) => {
 
     return (
         <Grid container spacing={1}>
-            <ItemShowRow name={intl.formatMessage({ id: 'app.item-show.name' })} value={item.name} />
+            <ItemShowRow name={intl.formatMessage({ id: 'app.itemShow.name' })} value={item.name} />
             <ItemShowRow
-                name={intl.formatMessage({ id: 'app.item-show.tags' })}
+                name={intl.formatMessage({ id: 'app.itemShow.tags' })}
                 value={
                     <Box sx={{ display: 'flex', gap: '0.25rem' }}>
                         {item.tags.map((t) => (
@@ -28,8 +28,8 @@ const ItemShowDetails = ({ item }: ItemShowDetailsProps) => {
                     </Box>
                 }
             />
-            <ItemShowRow name={intl.formatMessage({ id: 'app.item-show.topic' })} value={item.collection.topic.value} />
-            <ItemShowRow name={intl.formatMessage({ id: 'app.item-show.user' })} value={item.collection.user.email} />
+            <ItemShowRow name={intl.formatMessage({ id: 'app.itemShow.topic' })} value={item.collection.topic.value} />
+            <ItemShowRow name={intl.formatMessage({ id: 'app.itemShow.user' })} value={item.collection.user.email} />
             <ItemShowDivider />
             {helper.getFieldEntries().map((entry) => (
                 <ItemShowRow key={entry.name} name={entry.name} value={entry.value} />
