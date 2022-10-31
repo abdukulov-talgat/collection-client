@@ -2,8 +2,10 @@ import axios from 'axios';
 import { getAccessToken, saveAccessToken } from '../utils/settingsStorage';
 import { apiRoutes } from '../constants/apiRoutes';
 import store from '../redux/store';
-import { initSignIn } from '../redux/authSlice';
+import { initSignIn, signOut } from '../redux/authSlice';
 import jwtDecode from 'jwt-decode';
+import { history } from '../constants/history';
+import { appRoutes } from '../constants/appRoutes';
 
 const http = axios.create();
 
@@ -40,7 +42,10 @@ http.interceptors.response.use(
                 return await axios(options);
             }
         } catch (e) {
-            //???
+            if (axios.isAxiosError(e) && e.response && e.response.status === 403) {
+                store.dispatch(signOut());
+                history.push(appRoutes.SIGNIN);
+            }
         }
     }
 );

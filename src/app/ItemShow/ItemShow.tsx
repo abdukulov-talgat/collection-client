@@ -10,12 +10,16 @@ import ItemShowComments from './ItemShowComments';
 const ItemShow = () => {
     const { id } = useParams();
     const [item, setItem] = useState<ConcreteItem | null>(null);
+    const [shouldRefetch, setShouldRefetch] = useState(true);
 
     useEffect(() => {
-        http.get<ConcreteItem>(`${apiRoutes.ITEMS}/${id}`).then((response) => {
-            setItem(response.data);
-        });
-    }, [id]);
+        if (shouldRefetch) {
+            http.get<ConcreteItem>(`${apiRoutes.ITEMS}/${id}`).then((response) => {
+                setItem(response.data);
+                setShouldRefetch(false);
+            });
+        }
+    }, [id, shouldRefetch]);
 
     if (!item) {
         return <CircularProgress />;
@@ -23,7 +27,7 @@ const ItemShow = () => {
 
     return (
         <Box>
-            <ItemShowDetails item={item} />
+            <ItemShowDetails item={item} onItemLike={() => setShouldRefetch(true)} />
             <ItemShowComments itemId={item.id} />
         </Box>
     );

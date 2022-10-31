@@ -6,14 +6,26 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ConcreteItem } from '../../types/ConcreteItem';
 import { useIntl } from 'react-intl';
 import { ItemShowColumnHelper } from '../../shared/utils/ItemShowColumnHelper';
+import { http } from '../../shared/http/http';
+import { apiRoutes } from '../../shared/constants/apiRoutes';
 
 interface ItemShowDetailsProps {
     item: ConcreteItem;
+    onItemLike: () => void;
 }
 
-const ItemShowDetails = ({ item }: ItemShowDetailsProps) => {
+const ItemShowDetails = ({ item, onItemLike }: ItemShowDetailsProps) => {
     const intl = useIntl();
     const helper = new ItemShowColumnHelper(item);
+
+    const handleLikeButtonClick = async () => {
+        if (!item.alreadyLiked) {
+            await http.post(`${apiRoutes.ITEMS}/${item.id}/likes`);
+        } else {
+            await http.delete(`${apiRoutes.ITEMS}/${item.id}/likes`);
+        }
+        onItemLike();
+    };
 
     return (
         <Grid container spacing={1}>
@@ -36,7 +48,7 @@ const ItemShowDetails = ({ item }: ItemShowDetailsProps) => {
             ))}
             <ItemShowDivider />
             <Grid item xs={12}>
-                <IconButton>
+                <IconButton onClick={handleLikeButtonClick}>
                     <FavoriteIcon color={item.alreadyLiked ? 'primary' : 'action'} />
                     {item.likesCount}
                 </IconButton>

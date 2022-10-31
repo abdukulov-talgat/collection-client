@@ -5,6 +5,9 @@ import CommentForm, { CommentFormInputs } from '../../common/CommentForm/Comment
 import CommentList from '../../common/CommentList/CommentList';
 import { Comment } from '../../types/Comment';
 import { io } from 'socket.io-client';
+import { websocketEvents } from '../../shared/constants/websocketEvents';
+import { useSelector } from 'react-redux';
+import { selectAuthState } from '../../shared/redux/authSlice';
 
 interface ItemShowCommentsProps {
     itemId: number;
@@ -14,24 +17,16 @@ const ItemShowComments = ({ itemId }: ItemShowCommentsProps) => {
     const [comments, setComments] = useState<Comment[]>([]);
     const [isSending, setIsSending] = useState(false);
     const [text, setText] = useState('');
+    const { isAuth } = useSelector(selectAuthState);
 
     useEffect(() => {
         http.get(`${apiRoutes.ITEMS}/${itemId}/comments`).then((response) => setComments(response.data));
     }, [itemId]);
 
     useEffect(() => {
-        const socket = io('http://localhost:3000', { auth: { itemRoomId: itemId } });
-        socket.on('connect', function () {
-            console.log('connected');
-        });
-        socket.on('app.item.comment.create', function (comment: Comment) {
+        const socket = io('/', { auth: { itemRoomId: itemId } });
+        socket.on(websocketEvents.ITEM_NEW_COMMENT, function (comment: Comment) {
             setComments((prevState) => [...prevState, comment]);
-        });
-        socket.on('exception', function () {
-            console.log('exception');
-        });
-        socket.on('disconnect', function () {
-            console.log('disconnect');
         });
         return () => {
             socket.disconnect();
@@ -42,6 +37,7 @@ const ItemShowComments = ({ itemId }: ItemShowCommentsProps) => {
         try {
             setIsSending(true);
             await http.post(`${apiRoutes.ITEMS}/${itemId}/comments`, data);
+            setText('');
         } finally {
             setIsSending(false);
         }
@@ -50,7 +46,9 @@ const ItemShowComments = ({ itemId }: ItemShowCommentsProps) => {
     return (
         <div>
             <CommentList comments={comments} />
-            <CommentForm onSubmit={handleFormSubmit} isSending={isSending} text={text} onTextChange={setText} />
+            {isAuth && (
+                <CommentForm onSubmit={handleFormSubmit} isSending={isSending} text={text} onTextChange={setText} />
+            )}
         </div>
     );
 };
