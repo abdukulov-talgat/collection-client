@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { List, Typography } from '@mui/material';
-
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
 import { Collection } from '../../types/Collection';
 import { FormattedMessage } from 'react-intl';
 import BiggestCollection from './BiggestCollection';
 
-const COLLECTIONS_TO_SHOW = 5;
-
 const BiggestCollections = () => {
     const [collections, setCollections] = useState<Collection[]>([]);
 
     useEffect(() => {
-        http.get(`${apiRoutes.COLLECTIONS}?order=itemsCount&direction=DESC&limit=${COLLECTIONS_TO_SHOW}`).then(
-            (response) => setCollections(response.data)
+        http.get(`${apiRoutes.COLLECTIONS}?order=itemsCount&direction=DESC`).then((response) =>
+            setCollections(response.data.slice(0, 5))
         );
     }, []);
 

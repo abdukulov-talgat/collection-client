@@ -3,14 +3,14 @@ import { Chip, Grid } from '@mui/material';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
 import { http } from '../../shared/http/http';
 import { Tag } from '../../types/Tag';
-
-const CLOUDS_COUNT = 20;
+import { Link as RouterLink } from 'react-router-dom';
+import { appRoutes } from '../../shared/constants/appRoutes';
 
 const TagClouds = () => {
     const [tags, setTags] = useState<Tag[]>([]);
 
     useEffect(() => {
-        http.get(`${apiRoutes.TAGS}?page=1&limit=${CLOUDS_COUNT}`).then((response) => {
+        http.get(apiRoutes.TAGS).then((response) => {
             setTags(response.data);
         });
     }, []);
@@ -18,7 +18,13 @@ const TagClouds = () => {
     return (
         <Grid container gap={2} justifyContent="center">
             {tags.map((tag) => (
-                <Chip key={tag.id} label={tag.value} onClick={() => alert(tag.value)} />
+                <Chip
+                    key={tag.id}
+                    label={tag.value}
+                    clickable
+                    component={RouterLink}
+                    to={`${appRoutes.TAGS_SEARCH}/${tag.value}`}
+                />
             ))}
         </Grid>
     );

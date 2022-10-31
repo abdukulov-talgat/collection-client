@@ -13,6 +13,8 @@ const appRoutes = {
     ITEMS_DELETE: '/items/delete',
     NOT_FOUND: '/notfound',
     SERVER_ERROR: '/internal-error',
+    SEARCH: '/search',
+    TAGS_SEARCH: '/tags',
 };
 
 export { appRoutes };

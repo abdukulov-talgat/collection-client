@@ -8,6 +8,8 @@ const apiRoutes = {
     TAGS: '/tags',
     USERS: '/users',
     TOPICS: '/topics',
+    SEARCH: '/search',
+    TAGS_SEARCH: '/search/tags',
 };
 
 export { apiRoutes };

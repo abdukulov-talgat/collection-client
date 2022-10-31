@@ -6,6 +6,8 @@ import { useIntl } from 'react-intl';
 import { Search } from './StyledSearch';
 import { SearchIconWrapper } from './StyledSearchIconWrapper';
 import { StyledInputBase } from './StyledInputBase';
+import { useNavigate } from 'react-router-dom';
+import { appRoutes } from '../../shared/constants/appRoutes';
 
 type SearchInputs = {
     query: string;
@@ -19,9 +21,10 @@ const SearchBar = () => {
         clearErrors,
     } = useForm<SearchInputs>();
     const intl = useIntl();
+    const navigate = useNavigate();
 
     const handleFormSubmit = (data: SearchInputs) => {
-        alert(JSON.stringify(data));
+        navigate(`${appRoutes.SEARCH}?query=${data.query}`);
     };
 
     return (

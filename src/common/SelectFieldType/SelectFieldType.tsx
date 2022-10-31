@@ -11,7 +11,7 @@ const SelectFieldType = ({ register }: SelectFieldTypeProps) => {
     return (
         <FormControl sx={{ minWidth: 150 }}>
             <InputLabel>Field type</InputLabel>
-            <Select {...register} label="Field type">
+            <Select {...register} label="Field type" defaultValue={fieldTypes.STRING}>
                 {Object.values(fieldTypes).map((fieldType) => (
                     <MenuItem key={fieldType} value={fieldType}>
                         {fieldType}

@@ -20,6 +20,9 @@ import CollectionCreate from './app/CollectionCreate/CollectionCreate';
 import ItemCreate from './app/ItemCreate/ItemCreate';
 import ItemShow from './app/ItemShow/ItemShow';
 import { ItemEdit } from './app/ItemEdit/ItemEdit';
+import SearchShow from './app/SearchShow/SearchShow';
+import TagsSearchShow from './app/SearchShow/TagsSearchShow';
+import QuerySearchShow from './app/SearchShow/QuerySearchShow';
 
 function App() {
     const themeValue = useSelector(selectTheme);
@@ -44,6 +47,8 @@ function App() {
                                 <Route path={`${appRoutes.COLLECTION_ROOT}/:id`} element={<CollectionShow />} />
                                 <Route path={`${appRoutes.ITEM_ROOT}/:id`} element={<ItemShow />} />
                                 <Route path={`${appRoutes.ITEM_EDIT}/:id`} element={<ItemEdit />} />
+                                <Route path={`${appRoutes.TAGS_SEARCH}/:tag`} element={<TagsSearchShow />} />
+                                <Route path={`${appRoutes.SEARCH}`} element={<QuerySearchShow />} />
                                 {/*withAuth*/}
                                 <Route path={`${appRoutes.COLLECTION_CREATE}`} element={<CollectionCreate />} />
                                 <Route path={`${appRoutes.ITEM_CREATE}`} element={<ItemCreate />} />

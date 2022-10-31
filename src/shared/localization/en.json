@@ -50,5 +50,6 @@
     "app.commentList.author": "from",
     "app.commentList.empty": "No comments yet",
     "app.dictionary.yes": "Yes",
-    "app.dictionary.no": "No"
+    "app.dictionary.no": "No",
+    "app.dictionary.learnMore": "Learn more"
 }

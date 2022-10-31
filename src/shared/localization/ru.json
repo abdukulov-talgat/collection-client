@@ -50,5 +50,6 @@
     "app.commentList.author": "От",
     "app.commentList.empty": "Комментарии отсутствуют",
     "app.dictionary.yes": "Да",
-    "app.dictionary.no": "Нет"
+    "app.dictionary.no": "Нет",
+    "app.dictionary.learnMore": "Подробнее"
 }
