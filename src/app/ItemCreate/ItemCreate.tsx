@@ -10,11 +10,13 @@ import { apiRoutes } from '../../shared/constants/apiRoutes';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import { Tag } from '../../types/Tag';
 import { appRoutes } from '../../shared/constants/appRoutes';
+import { useIntl } from 'react-intl';
 
 const ItemCreate = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
     const { register, handleSubmit, control } = useForm();
+    const intl = useIntl();
 
     if (!state) {
         return <Navigate to={appRoutes.HOME} />;
@@ -46,7 +48,7 @@ const ItemCreate = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <TextField
                     {...register('name', { required: { value: true, message: 'app.form.required' } })}
-                    label="Name"
+                    label={intl.formatMessage({ id: 'app.itemCreate.name' })}
                 />
                 <Controller
                     name="tags"
@@ -58,19 +60,19 @@ const ItemCreate = () => {
                             isMulti
                             styles={{ menu: (provided) => ({ ...provided, zIndex: 9999 }) }}
                             onChange={onChange}
+                            placeholder={intl.formatMessage({ id: 'app.itemCreate.tags' })}
                         />
                     )}
                 />
                 {customFieldsSchema.map((field, index) => (
                     <CustomFieldSelector key={index} register={register} schema={field} />
                 ))}
-                <Box sx={{ display: 'flex', gap: '1em' }}>
+                <Box sx={{ textAlign: 'right' }}>
                     <Button type="submit" variant="contained">
                         Submit
                     </Button>
                 </Box>
             </Box>
-            <div>{JSON.stringify(state)}</div>
         </form>
     );
 };

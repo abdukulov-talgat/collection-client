@@ -10,6 +10,7 @@ import { fieldTypes } from '../../shared/constants/fieldTypes';
 import MDEditor from '@uiw/react-md-editor';
 import { getTopics } from '../../shared/constants/topics';
 import { appRoutes } from '../../shared/constants/appRoutes';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 interface CollectionCreateInputs {
     userId: number;
@@ -29,6 +30,7 @@ const CollectionCreate = () => {
     const navigate = useNavigate();
     const { register, control, handleSubmit } = useForm<CollectionCreateInputs>();
     const { append, fields } = useFieldArray({ name: 'customColumns', control: control });
+    const intl = useIntl();
 
     if (!state) {
         return <Navigate to={appRoutes.HOME} />;
@@ -86,10 +88,10 @@ const CollectionCreate = () => {
                         variant="outlined"
                         onClick={() => append({ name: '', type: fieldTypes.STRING })}
                     >
-                        Add field
+                        <FormattedMessage id="app.profile.collectionsCreate.addField" />
                     </Button>
                     <Button type="submit" variant="contained">
-                        Submit
+                        <FormattedMessage id="app.button.submit" />
                     </Button>
                 </Box>
             </Box>

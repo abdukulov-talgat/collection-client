@@ -5,6 +5,7 @@ import { Collection } from '../../types/Collection';
 import { Button, Link, List, ListItem } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { appRoutes } from '../../shared/constants/appRoutes';
+import { FormattedMessage } from 'react-intl';
 
 interface UserCollectionsProps {
     profileId: string;
@@ -38,7 +39,7 @@ const UserCollections = ({ profileId }: UserCollectionsProps) => {
                     type="button"
                     variant="outlined"
                 >
-                    Create
+                    <FormattedMessage id="app.profile.collections.create" />
                 </Button>
             </div>
         </>
