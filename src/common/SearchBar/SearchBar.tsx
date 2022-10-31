@@ -16,6 +16,7 @@ const SearchBar = () => {
         register,
         handleSubmit,
         formState: { errors },
+        clearErrors,
     } = useForm<SearchInputs>();
     const intl = useIntl();
 
@@ -38,7 +39,7 @@ const SearchBar = () => {
                             },
                         })}
                         placeholder={intl.formatMessage({ id: 'app.navigation.search.placeholder' })}
-                        error={!!errors.query}
+                        onBlur={() => clearErrors()}
                     />
                 </Search>
             </Tooltip>
