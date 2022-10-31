@@ -7,11 +7,12 @@ const appRoutes = {
     PROFILE: '/profile',
     COLLECTION_ROOT: '/collections',
     COLLECTION_CREATE: '/collections/create',
-    COLLECTION_EDIT: '/collections/edit',
     ITEM_ROOT: '/items',
     ITEM_CREATE: '/items/create',
     ITEM_EDIT: '/items/edit',
     ITEMS_DELETE: '/items/delete',
+    NOT_FOUND: '/notfound',
+    SERVER_ERROR: '/internal-error',
 };
 
 export { appRoutes };

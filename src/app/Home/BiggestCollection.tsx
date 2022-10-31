@@ -14,7 +14,7 @@ const BiggestCollection = ({ collection }: BiggestCollectionProps) => {
     const intl = useIntl();
 
     return (
-        <ListItem key={collection.id}>
+        <ListItem>
             <Grid container rowGap={1}>
                 <ListItemGroup xs={6} sm={6} title={intl.formatMessage({ id: 'app.biggest.name' })}>
                     <Link component={RouterLink} to={`${appRoutes.COLLECTION_ROOT}/${collection.id}`}>

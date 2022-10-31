@@ -14,7 +14,7 @@ const LastItem = ({ item }: LastItemProps) => {
     const intl = useIntl();
 
     return (
-        <ListItem key={item.id}>
+        <ListItem>
             <Grid container rowGap={1}>
                 <ListItemGroup xs={6} sm={6} title={intl.formatMessage({ id: 'app.lastItems.itemName' })}>
                     <Link component={RouterLink} to={`${appRoutes.ITEM_ROOT}/${item.id}`}>

@@ -2,7 +2,7 @@ export interface ConcreteCollection {
     id: number;
     name: string;
     imageSrc: string;
-    customColumns?: string;
+    customColumns: string;
     description: string;
     userId: number;
     topic: {

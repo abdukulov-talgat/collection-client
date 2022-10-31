@@ -1,5 +1,9 @@
 import { appRoles } from '../constants/appRoles';
 
-export const isAdmin = <T extends { roles: string[] }>(authInfo: T) => {
+interface IncludeRoles {
+    roles: string[];
+}
+
+export const isAdmin = <T extends IncludeRoles>(authInfo: T) => {
     return authInfo.roles.includes(appRoles.ADMIN);
 };

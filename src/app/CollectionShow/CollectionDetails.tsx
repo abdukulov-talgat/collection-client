@@ -3,6 +3,9 @@ import { ConcreteCollection } from '../../types/ConcreteCollection';
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 import MDEditor from '@uiw/react-md-editor';
 import CollectionDetailsControls from './CollectionDetailsControls';
+import { useSelector } from 'react-redux';
+import { selectAuthState } from '../../shared/redux/authSlice';
+import { isAdmin } from '../../shared/utils/authHelpers';
 
 interface CollectionDetailsProps {
     collection: ConcreteCollection;
@@ -10,6 +13,9 @@ interface CollectionDetailsProps {
 
 const CollectionDetails = ({ collection }: CollectionDetailsProps) => {
     const theme = useTheme();
+    const { info } = useSelector(selectAuthState);
+
+    const shouldRenderControls = info && (isAdmin(info) || collection.userId === info.id);
 
     return (
         <Grid container columnSpacing={2} rowSpacing={1}>
@@ -36,7 +42,7 @@ const CollectionDetails = ({ collection }: CollectionDetailsProps) => {
                     }}
                 />
             </Grid>
-            <CollectionDetailsControls collection={collection} />
+            {shouldRenderControls && <CollectionDetailsControls collection={collection} />}
         </Grid>
     );
 };

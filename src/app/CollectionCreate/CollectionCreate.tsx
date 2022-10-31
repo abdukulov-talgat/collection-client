@@ -45,7 +45,7 @@ const CollectionCreate = () => {
     const prepareFormData = (data: CollectionCreateInputs) => {
         const formData = new FormData();
         formData.set('name', data.name);
-        formData.set('description', description || '');
+        formData.set('description', description as string);
         formData.set('userId', data.userId.toString());
         formData.set('topicId', data.topicId.toString());
         formData.set('customColumns', JSON.stringify(data.customColumns));
@@ -60,7 +60,13 @@ const CollectionCreate = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <input type="hidden" {...register('userId')} value={state.userId} />
                 <TextField label="Name" {...register('name', { required: true })} />
-                <MDEditor value={description} onChange={setDescription} style={{ whiteSpace: 'pre' }} />
+                <MDEditor
+                    value={description}
+                    onChange={setDescription}
+                    style={{ whiteSpace: 'pre' }}
+                    preview="edit"
+                    textareaProps={{ required: true }}
+                />
                 <SelectTopic register={register('topicId', { required: true })} defaultValue={getTopics()[0].value} />
                 <TextField
                     type="file"
@@ -75,10 +81,7 @@ const CollectionCreate = () => {
                             label="Field Name"
                             {...register(`customColumns.${i}.name` as const, { required: true })}
                         />
-                        <SelectFieldType
-                            defaultValue={f.type}
-                            register={register(`customColumns.${i}.type` as const, { required: true })}
-                        />
+                        <SelectFieldType register={register(`customColumns.${i}.type` as const, { required: true })} />
                     </Box>
                 ))}
                 <Box sx={{ display: 'flex', gap: '1em' }}>

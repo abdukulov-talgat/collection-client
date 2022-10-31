@@ -23,9 +23,6 @@ const CollectionDetailsControls = ({ collection }: CollectionDetailsControlsProp
 
     return (
         <Grid item>
-            <IconButton component={RouterLink} to={appRoutes.COLLECTION_EDIT} state={collection}>
-                <EditIcon color="primary" />
-            </IconButton>
             <IconButton type="button" onClick={handleDeleteButton}>
                 <DeleteIcon color="primary" />
             </IconButton>
