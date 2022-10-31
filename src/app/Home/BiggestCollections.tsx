@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Link, List, ListItem, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import ListItemGroup from '../../common/ListItemGroup/ListItemGroup';
+import { List, Typography } from '@mui/material';
+
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
 import { Collection } from '../../types/Collection';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { appRoutes } from '../../shared/constants/appRoutes';
+import { FormattedMessage } from 'react-intl';
+import BiggestCollection from './BiggestCollection';
 
 const COLLECTIONS_TO_SHOW = 5;
 
 const BiggestCollections = () => {
     const [collections, setCollections] = useState<Collection[]>([]);
-    const intl = useIntl();
 
     useEffect(() => {
         http.get(`${apiRoutes.COLLECTIONS}?order=itemsCount&direction=DESC&limit=${COLLECTIONS_TO_SHOW}`).then(
@@ -27,23 +25,7 @@ const BiggestCollections = () => {
             </Typography>
             <List>
                 {collections.map((collection) => (
-                    <ListItem key={collection.id}>
-                        <Grid container rowGap={1}>
-                            <ListItemGroup xs={6} sm={6} title={intl.formatMessage({ id: 'app.biggest.name' })}>
-                                <Link component={RouterLink} to={`${appRoutes.COLLECTION_ROOT}/${collection.id}`}>
-                                    {collection.name}
-                                </Link>
-                            </ListItemGroup>
-                            <ListItemGroup
-                                justifyContent="flex-end"
-                                xs={6}
-                                sm={6}
-                                title={intl.formatMessage({ id: 'app.biggest.count' })}
-                            >
-                                {collection.itemsCount.toString()}
-                            </ListItemGroup>
-                        </Grid>
-                    </ListItem>
+                    <BiggestCollection key={collection.id} collection={collection} />
                 ))}
             </List>
         </>
