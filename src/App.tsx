@@ -20,7 +20,6 @@ import CollectionCreate from './app/CollectionCreate/CollectionCreate';
 import ItemCreate from './app/ItemCreate/ItemCreate';
 import ItemShow from './app/ItemShow/ItemShow';
 import { ItemEdit } from './app/ItemEdit/ItemEdit';
-import SearchShow from './app/SearchShow/SearchShow';
 import TagsSearchShow from './app/SearchShow/TagsSearchShow';
 import QuerySearchShow from './app/SearchShow/QuerySearchShow';
 
@@ -49,13 +48,10 @@ function App() {
                                 <Route path={`${appRoutes.ITEM_EDIT}/:id`} element={<ItemEdit />} />
                                 <Route path={`${appRoutes.TAGS_SEARCH}/:tag`} element={<TagsSearchShow />} />
                                 <Route path={`${appRoutes.SEARCH}`} element={<QuerySearchShow />} />
-                                {/*withAuth*/}
                                 <Route path={`${appRoutes.COLLECTION_CREATE}`} element={<CollectionCreate />} />
                                 <Route path={`${appRoutes.ITEM_CREATE}`} element={<ItemCreate />} />
-                                {/*withAdmin*/}
                                 <Route path={appRoutes.ADMIN} element={<Admin />} />
                                 <Route path={`${appRoutes.EDIT_USER}/:id`} element={<EditUser />} />
-                                {/*ERRORS PAGE*/}
                                 <Route path={appRoutes.NOT_FOUND} element={<div>NOT FOUND TEMP</div>} />
                                 <Route path="*" element={<div>NOT FOUND TEMP</div>} />
                             </Route>

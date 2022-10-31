@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import withAuth from '../../hocs/withAuth';
 import { useForm, Controller } from 'react-hook-form';
 import { Box, Button, CircularProgress, TextField } from '@mui/material';

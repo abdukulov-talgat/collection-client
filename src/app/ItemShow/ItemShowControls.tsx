@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { appRoutes } from '../../shared/constants/appRoutes';
 import EditIcon from '@mui/icons-material/Edit';

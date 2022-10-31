@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConcreteItem } from '../../types/ConcreteItem';
-import { Button, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { appRoutes } from '../../shared/constants/appRoutes';
 import { Link as RouterLink } from 'react-router-dom';

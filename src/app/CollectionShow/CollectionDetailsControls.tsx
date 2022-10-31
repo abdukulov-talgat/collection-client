@@ -6,7 +6,6 @@ import { ConcreteCollection } from '../../types/ConcreteCollection';
 import { http } from '../../shared/http/http';
 import { apiRoutes } from '../../shared/constants/apiRoutes';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
 interface CollectionDetailsControlsProps {

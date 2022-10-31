@@ -4,9 +4,6 @@ import LastItems from './LastItems';
 import BiggestCollections from './BiggestCollections';
 import TagClouds from './TagClouds';
 
-// Last Added Items (CollectionName, Collection, Author)
-// 5 Biggest
-// Collections Tag Clouds
 const Home = () => {
     return (
         <>
