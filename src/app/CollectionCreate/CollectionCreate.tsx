@@ -10,7 +10,7 @@ import { fieldTypes } from '../../shared/constants/fieldTypes';
 import MDEditor from '@uiw/react-md-editor';
 import { getTopics } from '../../shared/constants/topics';
 import { appRoutes } from '../../shared/constants/appRoutes';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 interface CollectionCreateInputs {
     userId: number;
@@ -29,8 +29,7 @@ const CollectionCreate = () => {
     const [description, setDescription] = useState<string | undefined>();
     const navigate = useNavigate();
     const { register, control, handleSubmit } = useForm<CollectionCreateInputs>();
-    const { append, fields } = useFieldArray({ name: 'customColumns', control: control });
-    const intl = useIntl();
+    const { append, fields, remove } = useFieldArray({ name: 'customColumns', control: control });
 
     if (!state) {
         return <Navigate to={appRoutes.HOME} />;
@@ -89,6 +88,14 @@ const CollectionCreate = () => {
                         onClick={() => append({ name: '', type: fieldTypes.STRING })}
                     >
                         <FormattedMessage id="app.profile.collectionsCreate.addField" />
+                    </Button>
+                    <Button
+                        type="button"
+                        variant="outlined"
+                        disabled={fields.length === 0}
+                        onClick={() => remove(fields.length - 1)}
+                    >
+                        <FormattedMessage id="app.profile.collectionsCreate.removeField" />
                     </Button>
                     <Button type="submit" variant="contained">
                         <FormattedMessage id="app.button.submit" />
