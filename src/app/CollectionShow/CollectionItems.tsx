@@ -23,15 +23,12 @@ const CollectionItems = ({ collection }: CollectionItemsProps) => {
     }, [collection.id]);
 
     return (
-        <>
-            <div>ItemsList for collection {collection.id}</div>
-            <DataGrid
-                columns={dataGridHelper.getGridColumns()}
-                rows={dataGridHelper.getGridRows()}
-                autoHeight
-                onCellClick={(params) => navigate(`${appRoutes.ITEM_ROOT}/${params.id}`)}
-            />
-        </>
+        <DataGrid
+            columns={dataGridHelper.getGridColumns()}
+            rows={dataGridHelper.getGridRows()}
+            autoHeight
+            onCellClick={(params) => navigate(`${appRoutes.ITEM_ROOT}/${params.id}`)}
+        />
     );
 };
 
