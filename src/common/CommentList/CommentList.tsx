@@ -3,6 +3,7 @@ import { Comment } from '../../types/Comment';
 import { Grid, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import CommentItem from '../CommentItem/CommentItem';
+import EmptyCommentList from '../EmptyCommentList/EmptyCommentList';
 
 interface CommentListProps {
     comments: Comment[];
@@ -16,9 +17,11 @@ const CommentList = ({ comments }: CommentListProps) => {
                     <FormattedMessage id="app.commentList.title" />
                 </Typography>
             </Grid>
-            {comments.map((comment) => (
-                <CommentItem key={comment.id} comment={comment} />
-            ))}
+            {comments.length === 0 ? (
+                <EmptyCommentList />
+            ) : (
+                comments.map((comment) => <CommentItem key={comment.id} comment={comment} />)
+            )}
         </Grid>
     );
 };

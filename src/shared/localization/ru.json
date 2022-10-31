@@ -48,6 +48,7 @@
     "app.commentForm.message": "Сообщение",
     "app.commentList.title": "Список комментариев",
     "app.commentList.author": "От",
+    "app.commentList.empty": "Комментарии отсутствуют",
     "app.dictionary.yes": "Да",
     "app.dictionary.no": "Нет"
 }

@@ -48,6 +48,7 @@
     "app.commentForm.message": "Message",
     "app.commentList.title": "Comment list",
     "app.commentList.author": "from",
+    "app.commentList.empty": "No comments yet",
     "app.dictionary.yes": "Yes",
     "app.dictionary.no": "No"
 }

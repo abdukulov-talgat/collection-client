@@ -44,12 +44,12 @@ const ItemShowComments = ({ itemId }: ItemShowCommentsProps) => {
     };
 
     return (
-        <div>
+        <>
             <CommentList comments={comments} />
             {isAuth && (
                 <CommentForm onSubmit={handleFormSubmit} isSending={isSending} text={text} onTextChange={setText} />
             )}
-        </div>
+        </>
     );
 };
 
