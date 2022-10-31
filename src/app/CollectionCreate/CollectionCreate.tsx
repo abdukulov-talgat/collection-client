@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
 import { http } from '../../shared/http/http';
@@ -9,6 +9,7 @@ import SelectTopic from '../../common/SelectTopic/SelectTopic';
 import { fieldTypes } from '../../shared/constants/fieldTypes';
 import MDEditor from '@uiw/react-md-editor';
 import { getTopics } from '../../shared/constants/topics';
+import { appRoutes } from '../../shared/constants/appRoutes';
 
 interface CollectionCreateInputs {
     userId: number;
@@ -28,6 +29,10 @@ const CollectionCreate = () => {
     const navigate = useNavigate();
     const { register, control, handleSubmit } = useForm<CollectionCreateInputs>();
     const { append, fields } = useFieldArray({ name: 'customColumns', control: control });
+
+    if (!state) {
+        return <Navigate to={appRoutes.HOME} />;
+    }
 
     const handleFormSubmit = (data: CollectionCreateInputs) => {
         const formData = prepareFormData(data);
@@ -54,7 +59,7 @@ const CollectionCreate = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <input type="hidden" {...register('userId')} value={state.userId} />
                 <TextField label="Name" {...register('name', { required: true })} />
-                <MDEditor value={description} onChange={setDescription} />
+                <MDEditor value={description} onChange={setDescription} style={{ whiteSpace: 'pre' }} />
                 <SelectTopic register={register('topicId', { required: true })} defaultValue={getTopics()[0].value} />
                 <TextField
                     type="file"

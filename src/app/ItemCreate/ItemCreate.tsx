@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import withAuth from '../../hocs/withAuth';
 import { useForm, Controller } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
@@ -15,6 +15,11 @@ const ItemCreate = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
     const { register, handleSubmit, control } = useForm();
+
+    if (!state) {
+        return <Navigate to={appRoutes.HOME} />;
+    }
+
     const customFieldsSchema: CustomFieldSchema[] = JSON.parse(state.customColumns);
 
     const handleFormSubmit = async ({ name, tags, ...customColumns }: any) => {
